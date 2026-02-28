@@ -2,7 +2,7 @@
 const argKey = x => x.toString() + ':' + typeof x;
 const genKey = args => args.map(argKey).join('|');
 
-const memoize = (fn, lendth) => {
+const memoize = (fn, length) => {
     const cache = new Map();
 
     return(...args) => {
@@ -21,3 +21,12 @@ const memoize = (fn, lendth) => {
         return res;
     };
 };
+
+const max = (...args) => Math.max(...args);
+const memoMax = memoize(max, 2);
+
+console.log(memoMax(1, 2, 3));    
+console.log(memoMax(1, 2, 3));    
+console.log(memoMax(4, 5, 6));    
+console.log(memoMax(7, 8, 9));    
+console.log(memoMax(10, 11, 12)); 
