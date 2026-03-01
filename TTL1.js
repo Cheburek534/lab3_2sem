@@ -15,7 +15,12 @@ const memoizeTTL = (fn, ttlMs = Infinity) => {
             cache.delete(key);
         }
         const res = fn(...args);
-        cache.set(key, {res, time: Date.noe()});
+        cache.set(key, {res, time: Date.now()});
         return res;
     };
 };
+const sum = (...args) => args.reduce((a, b) => a + b, 0);
+const ttl = memoizeTTL(sum, 100);
+console.log(ttl(5, 5));
+setTimeout(() => console.log("50ms: ", ttl(5, 5)), 50);
+setTimeout(() => console.log("150ms: ", ttl(5, 5)), 150);
